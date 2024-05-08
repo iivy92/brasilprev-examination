@@ -8,7 +8,7 @@ class PlayerStrategy(str, Enum):
     RANDOM = "Random"
 
 
-class Player(BaseModel):
+class Players(BaseModel):
     money: int = 300
     position: int = 0
     strategy: PlayerStrategy
