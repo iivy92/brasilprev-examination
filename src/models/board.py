@@ -10,3 +10,4 @@ class Board(BaseModel):
     plays: int = 0
     players: List[Player]
     cards: List[Property]
+    gameover: bool = False

@@ -2,15 +2,17 @@ from pydantic import BaseModel
 from enum import Enum
 from src import config
 
-class PlayerStrategy(str, Enum):
-    IMPULSIVE = "Impulsive"
-    DEMANDING = "Demanding"
-    CAUTIOUS = "Cautious"
-    RANDOM = "Random"
+
+class PlayerStrategy(Enum):
+    IMPULSIVE = 1
+    DEMANDING = 2
+    CAUTIOUS = 3
+    RANDOM = 4
 
 
 class Player(BaseModel):
-    money: int = config.PLAYER_MONEY
+    id: int
+    money: int = config.PLAYER_INITIAL_MONEY
     position: int = 0
     strategy: PlayerStrategy
     gameover: bool = False

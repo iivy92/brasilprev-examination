@@ -3,14 +3,15 @@ import pytest
 from src.models.board import Board
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
+from src import config
 
 @pytest.fixture
 def players():
     return [
-        Player(money=500, strategy=PlayerStrategy.IMPULSIVE),
-        Player(money=400, strategy=PlayerStrategy.DEMANDING),
-        Player(money=600, strategy=PlayerStrategy.CAUTIOUS),
-        Player(money=600, strategy=PlayerStrategy.RANDOM),
+        Player(money=config.PLAYER_INITIAL_MONEY, strategy=PlayerStrategy.IMPULSIVE),
+        Player(money=config.PLAYER_INITIAL_MONEY, strategy=PlayerStrategy.DEMANDING),
+        Player(money=config.PLAYER_INITIAL_MONEY, strategy=PlayerStrategy.CAUTIOUS),
+        Player(money=config.PLAYER_INITIAL_MONEY, strategy=PlayerStrategy.RANDOM),
     ]
 
 @pytest.fixture
