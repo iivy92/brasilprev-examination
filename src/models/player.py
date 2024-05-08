@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from enum import Enum
+from src import config
 
 class PlayerStrategy(str, Enum):
     IMPULSIVE = "Impulsive"
@@ -9,7 +10,7 @@ class PlayerStrategy(str, Enum):
 
 
 class Player(BaseModel):
-    money: int = 300
+    money: int = config.PLAYER_MONEY
     position: int = 0
     strategy: PlayerStrategy
     gameover: bool = False
