@@ -8,7 +8,7 @@ class PlayerStrategy(str, Enum):
     RANDOM = "Random"
 
 
-class Players(BaseModel):
+class Player(BaseModel):
     money: int = 300
     position: int = 0
     strategy: PlayerStrategy
@@ -33,7 +33,7 @@ class Players(BaseModel):
         elif self.strategy == PlayerStrategy.DEMANDING:
             return property.rent > 50
         elif self.strategy == PlayerStrategy.CAUTIOUS:
-            return self.money >= property.cost + 80
+            return self.money >= property.price + 80
         elif self.strategy == PlayerStrategy.RANDOM:
             return random.choice([True, False])
         
