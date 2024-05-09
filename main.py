@@ -1,5 +1,3 @@
-#import asyncio
-#from fastapi import FastAPI
 from src.services.simulation import HandlerSimulation
 
 def main():
