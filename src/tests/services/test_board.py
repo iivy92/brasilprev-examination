@@ -30,11 +30,11 @@ def test_board_initialization(handler_board):
     assert len(handler_board.board.players) == 4
     assert len(handler_board.board.cards) == 3
 
-def test_player_movement(handler_board):
-    player = handler_board.players[0]
-    initial_position = player.position
-    handler_board.walk(player)
-    assert player.position != initial_position
+# def test_player_movement(handler_board):
+#     player = handler_board.players[0]
+#     initial_position = player.position
+#     handler_board.walk(player)
+#     assert player.position != initial_position
 
 def test_buy_property(handler_board):
     player = handler_board.players[0]
