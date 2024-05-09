@@ -46,3 +46,20 @@ def test_calculate_timed_out_games(metrics_handler):
     timed_out_games = metrics_handler.calculate_timed_out_games()
 
     assert timed_out_games == 2
+
+def test_calculate_average_turns(metrics_handler, players, properties):
+    games = [
+        Board(plays=10, cards=properties, players=players, winner=players[0]),
+        Board(plays=15, cards=properties, players=players, winner=players[1]),
+        Board(plays=20, cards=properties, players=players, winner=players[2])
+    ]
+    
+    # Salvando as métricas para cada jogo
+    for game in games:
+        metrics_handler.save_metrics(game)
+    
+    # Calculando a média de turnos esperada
+    expected_average = (10 + 15 + 20) / 3
+    
+    # Verificando se o cálculo da média de turnos está correto
+    assert metrics_handler.calculate_average_turns() == expected_average
