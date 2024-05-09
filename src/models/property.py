@@ -5,5 +5,5 @@ from src.models.player import Player
 class Property(BaseModel):
     id: int
     owner: Player = None
-    price: float = random.randint(20, 110)
-    rent_price: float = price/2
+    price: float = None
+    rent_price: float = None
