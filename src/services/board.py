@@ -107,4 +107,4 @@ class HandlerBoard:
             self.check_gameover()
          
         if self.board.timed_out:
-            print(f"\nGame ended after 1000 turns. Player {self.board.winner.strategy} with {self.board.winner.money} money wins!")
+            print(f"\nGame ended after {config.TIMEOUT_ROUND} turns. Player {self.board.winner.strategy} with {self.board.winner.money} money wins!")

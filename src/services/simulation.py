@@ -12,7 +12,7 @@ class HandlerSimulation:
         self.metrics_handler = HandlerMetrics()
     
     def start_game(self):
-        print("================Starting the game simulation!================")
+        print("================================Starting the game simulation!================================")
 
         for _ in range(int(config.NUMBER_SIMULATIONS)):
             self.board_handler = HandlerBoard(self.create_players(), self.create_cards())
@@ -22,11 +22,11 @@ class HandlerSimulation:
                 self.board_handler.play_round()
             
             self.metrics_handler.save_metrics(self.board_handler.board)
-            #print(self.metrics_handler.rounds)
+
+        statistics = self.metrics_handler.calculate_statistics()
+        self.metrics_handler.print_statistics(statistics)
         
-        print(self.metrics_handler.calculate_statistics())
-        
-        print("================Ending the game simulation!================")
+        print("================================Ending the game simulation!================================")
     
     def create_players(self) -> List[Player]:
         strategies = list(PlayerStrategy)
