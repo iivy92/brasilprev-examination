@@ -87,7 +87,7 @@ class HandlerBoard:
         elif len(active_players) == 0:
             print("\nNo active players left. It's a tie!")
             self.board.gameover = True
-        elif self.board.plays >= 20:
+        elif self.board.plays >= 1000:
             richest_player = max(self.players, key=lambda x: x.money)
             self.board.winner = richest_player
             print(f"\nGame ended after 1000 turns. Player {richest_player.strategy} with {richest_player.money} money wins!")
@@ -113,12 +113,15 @@ class HandlerBoard:
         return False
 
     def start_game(self):
-        print("Starting the game!")
+        print("Starting the game simulation!")
         self.board.start_time = datetime.now()
 
         while not self.board.gameover:
             self.board.plays += 1
             self.play_round()
+        
+        import ipdb; ipdb.set_trace()
+        print("Ending the game simulation!")
 
     def play_round(self):
         print(f"\n============ Turn {self.board.plays} ============")
@@ -129,3 +132,4 @@ class HandlerBoard:
                 self.check_player_conditions(player)
             
             self.check_gameover()
+
