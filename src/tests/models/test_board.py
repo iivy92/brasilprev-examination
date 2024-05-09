@@ -1,9 +1,12 @@
 from datetime import datetime
+
 import pytest
+
+from src import config
 from src.models.board import Board
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
-from src import config
+
 
 @pytest.fixture
 def players():

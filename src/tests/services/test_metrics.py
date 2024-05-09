@@ -1,8 +1,10 @@
 import pytest
+
 from src.models.board import Board
-from src.services.metrics import HandlerMetrics
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
+from src.services.metrics import HandlerMetrics
+
 
 @pytest.fixture
 def metrics_handler():

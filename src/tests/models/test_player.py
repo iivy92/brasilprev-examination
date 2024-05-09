@@ -1,5 +1,7 @@
-from src.models.player import Player, PlayerStrategy
 import pytest
+
+from src.models.player import Player, PlayerStrategy
+
 
 @pytest.fixture
 def sample_player():

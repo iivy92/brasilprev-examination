@@ -1,10 +1,12 @@
 import random
 from typing import List
+
 from src import config
-from src.services.board import HandlerBoard
-from src.services.metrics import HandlerMetrics
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
+from src.services.board import HandlerBoard
+from src.services.metrics import HandlerMetrics
+
 
 class HandlerSimulation:
     def __init__(self):

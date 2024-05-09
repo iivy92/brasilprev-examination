@@ -1,7 +1,10 @@
 import random
+
 import pytest
+
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
+
 
 @pytest.fixture
 def sample_property():

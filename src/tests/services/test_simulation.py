@@ -1,8 +1,10 @@
 import pytest
-from src.services.simulation import HandlerSimulation
+
+from src import config
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
-from src import config
+from src.services.simulation import HandlerSimulation
+
 
 @pytest.fixture
 def simulation():

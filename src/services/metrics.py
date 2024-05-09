@@ -1,6 +1,7 @@
 from src.models.board import Board
 from src.models.player import PlayerStrategy
 
+
 class HandlerMetrics:
     def __init__(self):
         self.rounds = []

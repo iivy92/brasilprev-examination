@@ -1,11 +1,12 @@
 import random
 from datetime import datetime
 from typing import List, Optional
-from typing import List
+
+from src import config
+from src.models.board import Board
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
-from src.models.board import Board
-from src import config
+
 
 class HandlerBoard:
     def __init__(self, players: List[Player], properties: List[Property]):

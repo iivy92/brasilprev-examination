@@ -1,7 +1,9 @@
 import pytest
-from src.services.board import HandlerBoard
+
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
+from src.services.board import HandlerBoard
+
 
 @pytest.fixture
 def players():
