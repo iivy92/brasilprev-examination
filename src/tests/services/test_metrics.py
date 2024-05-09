@@ -25,6 +25,18 @@ def properties():
         Property(id=3, price=150, rent_price=30),
     ]
 
+@pytest.fixture
+def games(players, properties):
+    return [
+        Board(plays=10, cards=properties, players=players, winner=players[0]),
+        Board(plays=15, cards=properties, players=players, winner=players[1]),
+        Board(plays=20, cards=properties, players=players, winner=players[2]),
+        Board(plays=10, cards=properties, players=players, winner=players[3]),
+        Board(plays=15, cards=properties, players=players, winner=players[0]),
+        Board(plays=20, cards=properties, players=players, winner=players[1]),
+        Board(plays=25, cards=properties, players=players, winner=players[1])
+    ]
+
 def test_save_metrics(metrics_handler, players, properties):
     game_board = Board(winner=players[1], plays=10, timed_out=False, cards=properties, players=players)
     
@@ -47,19 +59,36 @@ def test_calculate_timed_out_games(metrics_handler):
 
     assert timed_out_games == 2
 
-def test_calculate_average_turns(metrics_handler, players, properties):
-    games = [
-        Board(plays=10, cards=properties, players=players, winner=players[0]),
-        Board(plays=15, cards=properties, players=players, winner=players[1]),
-        Board(plays=20, cards=properties, players=players, winner=players[2])
-    ]
-    
-    # Salvando as métricas para cada jogo
+def test_calculate_average_turns(metrics_handler, games):
     for game in games:
         metrics_handler.save_metrics(game)
     
-    # Calculando a média de turnos esperada
-    expected_average = (10 + 15 + 20) / 3
+    expected_average = (10 + 15 + 20 + 10 + 15 + 20 + 25) / 7
     
-    # Verificando se o cálculo da média de turnos está correto
     assert metrics_handler.calculate_average_turns() == expected_average
+
+def test_calculate_percentage_wins_by_strategy(metrics_handler, games):
+    for game in games:
+        metrics_handler.save_metrics(game)
+    
+    expected_percentages = {
+        PlayerStrategy.IMPULSIVE: 2 / len(games) * 100,
+        PlayerStrategy.DEMANDING: 3 / len(games) * 100,
+        PlayerStrategy.CAUTIOUS: 1 / len(games) * 100,
+        PlayerStrategy.RANDOM: 1 / len(games) * 100
+    }
+    
+    assert metrics_handler.calculate_percentage_wins_by_strategy() == expected_percentages
+
+def test_calculate_wins_by_strategy(metrics_handler, games):
+    for game in games:
+        metrics_handler.save_metrics(game)
+
+    expected_wins = {
+        PlayerStrategy.IMPULSIVE: 2,
+        PlayerStrategy.DEMANDING: 3,
+        PlayerStrategy.CAUTIOUS: 1,
+        PlayerStrategy.RANDOM: 1
+    }
+
+    assert metrics_handler.calculate_wins_by_strategy() == expected_wins
