@@ -12,7 +12,7 @@ class PlayerStrategy(Enum):
 
 class Player(BaseModel):
     id: int
-    money: int = config.PLAYER_INITIAL_MONEY
+    money: float = 300
     position: int = 0
     strategy: PlayerStrategy
     gameover: bool = False

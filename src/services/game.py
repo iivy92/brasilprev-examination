@@ -1,26 +1,26 @@
 from datetime import datetime
 from typing import List, Optional
 import random
-from .player import Player
-from .property import Property
-from .board import Board
+from src.models.player import Player, PlayerStrategy
+from src.models.property import Property
+from src.models.board import Board
 from src import config
 
-class Game:
+class GameSimulation:
     def __init__(self,):
-        self.players = create_players()
-        self.properties = create_cards()
-        self.board = Board(players=players, cards=properties)
+        self.players = self.create_players()
+        self.properties = self.create_cards()
+        self.board = Board(players=self.players, cards=self.properties)
 
-    def create_players() -> List[Player]:
+    def create_players(self) -> List[Player]:
         strategies = list(PlayerStrategy)
         random.shuffle(strategies)
         players = [Player(id=strategy.value, strategy=strategy) for strategy in strategies]
 
         return players
     
-    def create_cards() -> List[Property]:
-        quantity_of_properties = config.QUANTITY_OF_PROPERTIES
+    def create_cards(self) -> List[Property]:
+        quantity_of_properties = int(config.QUANTITY_OF_PROPERTIES)
         cards = [Property(id=i) for i in range(1, quantity_of_properties)]
 
         return cards
@@ -30,14 +30,13 @@ class Game:
         steps = self.roll_dice()
         print(f"Player {player.strategy} rolled a {steps}.")
 
+        if player.position < steps:
+            print(f"Player {player.strategy} completed a lap! They gained 100 in balance.")
+            player.money += 100
+
         player.position = (player.position + steps) % len(self.properties)
         print(f"Player {player.strategy} is now at position {player.position}.")
     
-    def verify_position(self, player: Player):
-        if player.position < steps:
-            print(f"Player {player.strategy} completed a lap! They gained 100 in balance.")
-            player.money += config.PLAYER_MONEY_ROUND
-
     def verify_property(self, player: Player):
         current_property = self.properties[player.position]
         if current_property.owner is None:
@@ -46,7 +45,7 @@ class Game:
             self.pay_rent(player, current_property)
 
     def buy_property(self, player: Player, property: Property):
-        if decide_to_buy_property(player, Property):
+        if self.decide_to_buy_property(player, property):
             player.money -= property.price
             property.owner = player
             print(f"Player {player.strategy} now owns property {property.id}.")
@@ -77,7 +76,7 @@ class Game:
         elif len(active_players) == 0:
             print("\nNo active players left. It's a tie!")
             self.board.gameover = True
-        elif self.board.plays >= 1000:
+        elif self.board.plays >= 20:
             richest_player = max(self.players, key=lambda x: x.money)
             self.board.winner = richest_player
             print(f"\nGame ended after 1000 turns. Player {richest_player.strategy} with {richest_player.money} money wins!")
@@ -94,7 +93,7 @@ class Game:
         if player.strategy == PlayerStrategy.IMPULSIVE:
             return True
         elif player.strategy == PlayerStrategy.DEMANDING:
-            return property.rent > 50
+            return property.rent_price > 50
         elif player.strategy == PlayerStrategy.CAUTIOUS:
             return player.money >= property.price + 80
         elif player.strategy == PlayerStrategy.RANDOM:
@@ -115,8 +114,6 @@ class Game:
         for player in self.players:
             if not player.gameover:
                 self.walk(player)
-                self.verify_position(player)
                 self.verify_property(player)
                 self.check_player_conditions(player)
                 self.check_gameover()
-
