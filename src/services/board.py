@@ -21,8 +21,8 @@ class HandlerBoard:
         player.position = (player.position + steps) % len(self.properties)
     
         if player.position < steps:
-            print(f"- {player.strategy} completed a lap! They gained 100 in balance.")
-            player.money += 100
+            print(f"- {player.strategy} completed a lap! They gained {config.PLAYER_MONEY_ROUND} in balance.")
+            player.money += float(config.PLAYER_MONEY_ROUND)
 
         print(f"- {player.strategy} is now at position {player.position}.")
     
@@ -71,7 +71,7 @@ class HandlerBoard:
         elif len(active_players) == 0:
             print("\nNo active players left. It's a tie!")
             self.board.gameover = True
-        elif self.board.plays >= 1000:
+        elif self.board.plays >= int(config.TIMEOUT_ROUND):
             richest_player = max(self.players, key=lambda x: x.money)
             self.board.winner = richest_player
             self.board.gameover = True

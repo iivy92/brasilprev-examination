@@ -14,14 +14,18 @@ class HandlerSimulation:
     def start_game(self):
         print("================Starting the game simulation!================")
 
-        self.board_handler = HandlerBoard(self.create_players(), self.create_cards())
+        for _ in range(int(config.NUMBER_SIMULATIONS)):
+            self.board_handler = HandlerBoard(self.create_players(), self.create_cards())
 
-        while not self.board_handler.board.gameover:
-            self.board_handler.board.plays += 1
-            self.board_handler.play_round()
+            while not self.board_handler.board.gameover:
+                self.board_handler.board.plays += 1
+                self.board_handler.play_round()
+            
+            self.metrics_handler.save_metrics(self.board_handler.board)
+            #print(self.metrics_handler.rounds)
         
-        self.metrics_handler.save_metrics(self.board_handler.board)
-        print(self.metrics_handler.rounds)
+        print(self.metrics_handler.calculate_statistics())
+        
         print("================Ending the game simulation!================")
     
     def create_players(self) -> List[Player]:
