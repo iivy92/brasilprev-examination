@@ -11,5 +11,5 @@ class HandlerMetrics:
             "winner": board_game.winner.strategy,
         }
         
-        self.rounds.append(board_game)
+        self.rounds.append(metrics)
     

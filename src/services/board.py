@@ -1,33 +1,17 @@
+import random
 from datetime import datetime
 from typing import List, Optional
-import random
+from typing import List
 from src.models.player import Player, PlayerStrategy
 from src.models.property import Property
 from src.models.board import Board
 from src import config
 
 class HandlerBoard:
-    def __init__(self,):
-        self.players = self.create_players()
-        self.properties = self.create_cards()
+    def __init__(self, players: List[Player], properties: List[Property]):
+        self.players = players
+        self.properties = properties
         self.board = Board(players=self.players, cards=self.properties)
-
-    def create_players(self) -> List[Player]:
-        strategies = list(PlayerStrategy)
-        random.shuffle(strategies)
-        players = [Player(id=strategy.value, strategy=strategy) for strategy in strategies]
-
-        return players
-    
-    def create_cards(self) -> List[Property]:
-        cards = []
-        quantity_of_properties = int(config.QUANTITY_OF_PROPERTIES)
-        for i in range(0, quantity_of_properties):
-            price = random.randint(20, 150)
-            rent_price = price/2
-            cards.append(Property(id=i, price=price, rent_price=rent_price))
-
-        return cards
     
     def walk(self, player: Player):
         print(f"\n- {player.strategy} is taking their turn with {player.money} money.")
@@ -90,8 +74,8 @@ class HandlerBoard:
         elif self.board.plays >= 1000:
             richest_player = max(self.players, key=lambda x: x.money)
             self.board.winner = richest_player
-            print(f"\nGame ended after 1000 turns. Player {richest_player.strategy} with {richest_player.money} money wins!")
             self.board.gameover = True
+            self.board.timed_out = True
     
     def roll_dice(self) -> int:
         return random.randint(1, 6)
@@ -112,17 +96,6 @@ class HandlerBoard:
         
         return False
 
-    def start_game(self):
-        print("Starting the game simulation!")
-        self.board.start_time = datetime.now()
-
-        while not self.board.gameover:
-            self.board.plays += 1
-            self.play_round()
-        
-        import ipdb; ipdb.set_trace()
-        print("Ending the game simulation!")
-
     def play_round(self):
         print(f"\n============ Turn {self.board.plays} ============")
         for player in self.players:
@@ -132,4 +105,6 @@ class HandlerBoard:
                 self.check_player_conditions(player)
             
             self.check_gameover()
-
+         
+        if self.board.timed_out:
+            print(f"\nGame ended after 1000 turns. Player {self.board.winner.strategy} with {self.board.winner.money} money wins!")
