@@ -1,11 +1,10 @@
-from fastapi import FastAPI
+#import asyncio
+#from fastapi import FastAPI
+from src.services.simulation import HandlerSimulation
 
+def main():
+    game_simulation = HandlerSimulation()
+    game_simulation.start_game()
 
-def create_app() -> FastAPI:
-    app = FastAPI(
-        title="Brasilprev - Banco Imobiliário",
-        version="1.0.0"
-    )
-    return app
-
-app = create_app()
+if __name__ == "__main__":
+    main()
