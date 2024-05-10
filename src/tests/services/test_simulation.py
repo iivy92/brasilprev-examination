@@ -10,11 +10,13 @@ from src.services.simulation import HandlerSimulation
 def simulation():
     return HandlerSimulation()
 
+
 def test_create_players(simulation):
     players = simulation.create_players()
     assert len(players) == 4
     assert all(isinstance(player, Player) for player in players)
     assert all(player.strategy in list(PlayerStrategy) for player in players)
+
 
 def test_create_cards(simulation):
     cards = simulation.create_cards()

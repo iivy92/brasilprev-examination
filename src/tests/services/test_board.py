@@ -14,6 +14,7 @@ def players():
         Player(id=4, money=300, position=0, strategy=PlayerStrategy.RANDOM),
     ]
 
+
 @pytest.fixture
 def properties():
     return [
@@ -22,9 +23,11 @@ def properties():
         Property(id=3, price=150, rent_price=30),
     ]
 
+
 @pytest.fixture
 def handler_board(players, properties):
     return HandlerBoard(players=players, properties=properties)
+
 
 def test_board_initialization(handler_board):
     assert handler_board.board.winner is None
@@ -32,11 +35,13 @@ def test_board_initialization(handler_board):
     assert len(handler_board.board.players) == 4
     assert len(handler_board.board.cards) == 3
 
+
 # def test_player_movement(handler_board):
 #     player = handler_board.players[0]
 #     initial_position = player.position
 #     handler_board.walk(player)
 #     assert player.position != initial_position
+
 
 def test_buy_property(handler_board):
     player = handler_board.players[0]
@@ -45,6 +50,7 @@ def test_buy_property(handler_board):
     handler_board.verify_property(player)
     assert player.money == initial_money - handler_board.properties[0].price
     assert handler_board.properties[0].owner == player
+
 
 def test_pay_rent(handler_board):
     player1 = handler_board.players[0]
@@ -56,8 +62,13 @@ def test_pay_rent(handler_board):
     initial_money_player1 = player1.money
     initial_money_player2 = player2.money
     handler_board.verify_property(player1)
-    assert player1.money == initial_money_player1 - handler_board.properties[1].rent_price
-    assert player2.money == initial_money_player2 + handler_board.properties[1].rent_price
+    assert (
+        player1.money == initial_money_player1 - handler_board.properties[1].rent_price
+    )
+    assert (
+        player2.money == initial_money_player2 + handler_board.properties[1].rent_price
+    )
+
 
 def test_game_over(handler_board):
     player = handler_board.players[0]
@@ -65,4 +76,3 @@ def test_game_over(handler_board):
     player.money = -2
     handler_board.check_player_conditions(player)
     assert player.gameover
-
