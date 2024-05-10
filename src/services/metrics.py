@@ -60,7 +60,8 @@ class HandlerMetrics:
         return max(wins_by_strategy, key=wins_by_strategy.get)
 
     def print_statistics(self, statistics: dict):
-        print("\n========================= Game Statistics =========================")
+        print("\n\n========================= Game Statistics =========================")
+        print(f"Total games: {len(self.rounds)}\n")
         print(f"Total timed-out games: {statistics['timed_out_games']}\n")
         print(f"Average turns per game: {statistics['average_turns']:.2f}\n")
         print("Percentage of wins by strategy:")

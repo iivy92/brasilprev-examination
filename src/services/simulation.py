@@ -18,7 +18,8 @@ class HandlerSimulation:
             "================================Starting the game simulation!================================"
         )
 
-        for _ in range(int(config.NUMBER_SIMULATIONS)):
+        for i in range(int(config.NUMBER_SIMULATIONS)):
+            print(f"\n============ Game {i+1} ============")
             self.board_handler = HandlerBoard(
                 self.create_players(), self.create_cards()
             )
@@ -28,6 +29,7 @@ class HandlerSimulation:
                 self.board_handler.play_round()
 
             self.metrics_handler.save_metrics(self.board_handler.board)
+            print(f"\n============ End of Game {i+1} ============")
 
         statistics = self.metrics_handler.calculate_statistics()
         self.metrics_handler.print_statistics(statistics)

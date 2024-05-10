@@ -107,7 +107,7 @@ class HandlerBoard:
         return False
 
     def play_round(self):
-        print(f"\n============ Turn {self.board.plays} ============")
+        print(f"\n====== Turn {self.board.plays} ======")
         for player in self.players:
             if not player.gameover:
                 self.walk(player)

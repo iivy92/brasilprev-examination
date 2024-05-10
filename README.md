@@ -53,11 +53,13 @@ Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobili
     python main.py
     ```
 
-6. **Acompanhe os resultados:**
+6. **Verificar Resultados:**
 
     Acompanhe o resultado da simulação no console.
     ```
     ========================= Game Statistics =========================
+        Total games: 300
+
         Total timed-out games: 207
 
         Average turns per game: 716.53
@@ -73,7 +75,7 @@ Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobili
     ```
 
 
-## Rodando os testes unitários
+## Rodando Testes Unitários
 
 1. **Executar comando:**
 
