@@ -1,4 +1,4 @@
-# Simulação de Jogo de Tabuleiro
+# Desafio Brasilprev
 
 Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobiliário, desenvolvido em Python. O jogo consiste em uma partida com múltiplos jogadores que se alternam em rodadas, movendo-se pelo tabuleiro, comprando propriedades e pagando aluguéis.
 
@@ -6,9 +6,9 @@ Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobili
 ## Requisitos do Sistema
 
 - Python 3.x
-- Bibliotecas Python: Pydantic, Poetry
+- Pip, Poetry
 
-## Configuração do Ambiente de Desenvolvimento
+## Executando Localmente
 
 1. **Clonar o Repositório:**
 
@@ -16,7 +16,7 @@ Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobili
     git clone https://github.com/iivy92/brasilprev-examination.git
     ```
 
-2. **Entre no projeto:**
+2. **Entrar no diretório do projeto:**
 
     ```bash
     cd brasilprev-examination
@@ -24,8 +24,11 @@ Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobili
 
 3. **Instalar Poetry:**
 
-    Certifique-se de ter Poetry instalado. Se não tiver, você pode instalá-lo seguindo as [instruções oficiais](https://python-poetry.org/docs/#installation).
+    Certifique-se de ter Poetry instalado. 
 
+    ```bash
+    pip install poetry
+    ```
 4. **Instalar Dependências:**
 
     Dentro do diretório do projeto, execute:
@@ -47,5 +50,17 @@ Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobili
     Agora você está pronto para executar o projeto:
 
     ```bash
-    poetry run python main.py
+    python main.py
+
+6. **Acompanhe os resultados:**
+
+    Acompanhe o resultado da simulação no console.
+
+
+## Rodando os testes unitários
+
+1. **Executar comando:**
+
+    ```bash
+    pytest --cov=src
     ```
