@@ -1,8 +1,10 @@
-from datetime import datetime
 from typing import List, Optional
+
 from pydantic import BaseModel
+
 from .player import Player
 from .property import Property
+
 
 class Board(BaseModel):
     winner: Optional[Player] = None
