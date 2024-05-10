@@ -51,10 +51,26 @@ Este projeto é uma simulação de um jogo de tabuleiro similar ao Banco Imobili
 
     ```bash
     python main.py
+    ```
 
 6. **Acompanhe os resultados:**
 
     Acompanhe o resultado da simulação no console.
+    ```
+    ========================= Game Statistics =========================
+        Total timed-out games: 207
+
+        Average turns per game: 716.53
+
+        Percentage of wins by strategy:
+        - CAUTIOUS: 37.33%
+        - IMPULSIVE: 45.00%
+        - DEMANDING: 8.67%
+        - RANDOM: 9.00%
+
+        Most winning strategy: IMPULSIVE
+
+    ```
 
 
 ## Rodando os testes unitários
